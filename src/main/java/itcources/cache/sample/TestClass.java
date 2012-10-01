@@ -20,7 +20,7 @@ public class TestClass {
         return res;
     }
 
-    @Cache(maxEntriesForKey = 1000, ttl = 100)
+    @Cache(maxEntriesForKey = 1000, ttl = 10000)
     public void print(String message) {
         System.out.println("call# " + call + " message " + message);
         call++;

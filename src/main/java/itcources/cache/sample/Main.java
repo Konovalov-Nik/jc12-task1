@@ -15,8 +15,8 @@ public class Main {
         /*for (int i = 0; i < 1000000; i++) {
             System.out.println(testClass.addTenMillionDoubles(0));
         } */
-        for (int i = 0; i < 2000000; i++) {
-            testClass.print(String.valueOf(i%1000));
+        for (int i = 0; i < 4; i++) {
+            testClass.print(String.valueOf(1000));
         }
 
     }

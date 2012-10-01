@@ -12,7 +12,7 @@ import java.security.ProtectionDomain;
  * @author Nikita Konovalov
  */
 public class CacheTransforemer implements ClassFileTransformer {
-    @Override
+
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
         ClassPool classPool = ClassPool.getDefault();
         CtClass clazz = null;
@@ -30,11 +30,9 @@ public class CacheTransforemer implements ClassFileTransformer {
                     CallCache.instrumentMethod(clazz, method, key, annotation.maxEntriesForKey(), annotation.ttl());
 
                 }
-            } catch (ClassNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return classfileBuffer;
-            } catch (NotFoundException e) {
-                e.printStackTrace();
             }
         }
         try {

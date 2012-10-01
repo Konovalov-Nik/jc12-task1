@@ -24,22 +24,24 @@ public class CallCache {
             CtMethod copy = CtNewMethod.copy(method, clazz, null);
             String newName = method.getName() + "$__$";
             copy.setName(newName);
-            copy.setModifiers(Modifier.PUBLIC);
             clazz.addMethod(copy);
 
-            method.setBody("{" +
+
+            String body = "{" +
                     "long time = System.currentTimeMillis();" +
                     "long hash = itcources.cache.impl.CallCache.getHash($args);" +
-                    "if (itcources.cache.impl.CallCache.checkCache(\""+ key +"\", hash, time, (long)" + ttl +")) {" +
+                    "if (itcources.cache.impl.CallCache.checkCache(\"" + key + "\", hash, time, (long)" + ttl + ")) {" +
                     "return itcources.cache.impl.CallCache.getValue(\"" + key + "\", hash);" +
                     "} else {" +
-                    "Object value = " + newName +"($$);" +
-                    "itcources.cache.impl.CallCache.saveValue(\"" + key + "\", hash, value);" +
-                    "return value;" +
-                    "}" +
-                    "}");
+                    "Object value = " + newName + "($$);}" +
+                    //"itcources.cache.impl.CallCache.saveValue(\"" + key + "\", hash, value);" +
+                    //"return value;" +
+                    //"}" +
+                    "return null;}";
+            method.setBody(body);
 
-        } catch (CannotCompileException e) {
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
 
         }
