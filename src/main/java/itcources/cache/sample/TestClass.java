@@ -9,8 +9,15 @@ import java.util.Random;
  */
 public class TestClass {
     private static int call = 0;
+    //private static int call = 0;
 
     @Cache(maxEntriesForKey = 1, ttl = 100)
+    public short getX(Object x) throws Exception {
+//        throw new Exception("Hi!!");
+      return Byte.valueOf(x.toString());
+    }
+
+    @Cache(maxEntriesForKey = 1, ttl = 1000)
     public double addTenMillionDoubles(int param) {
         double res = 0;
         Random random = new Random(System.nanoTime());
@@ -20,7 +27,7 @@ public class TestClass {
         return res;
     }
 
-    @Cache(maxEntriesForKey = 1000, ttl = 10000)
+    @Cache(maxEntriesForKey = 1000, ttl = 1000)
     public void print(String message) {
         System.out.println("call# " + call + " message " + message);
         call++;

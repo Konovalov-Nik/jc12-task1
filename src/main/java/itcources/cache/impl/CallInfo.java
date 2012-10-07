@@ -6,25 +6,23 @@ package itcources.cache.impl;
 public class CallInfo {
     private long callTimestamp;
     private Object result;
+    private Exception e;
 
-    public CallInfo(long callTimestamp, Object result) {
+    public CallInfo(long callTimestamp, Object result, Exception e) {
         this.callTimestamp = callTimestamp;
         this.result = result;
+        this.e = e;
     }
 
     public long getCallTimestamp() {
         return callTimestamp;
     }
 
-    public void setCallTimestamp(long callTimestamp) {
-        this.callTimestamp = callTimestamp;
-    }
-
     public Object getResult() {
         return result;
     }
 
-    public void setResult(Object result) {
-        this.result = result;
+    public Exception getException() {
+        return e;
     }
 }
